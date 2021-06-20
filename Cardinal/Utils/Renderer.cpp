@@ -1,0 +1,135 @@
+#include "Renderer.h"
+#include "Utils.h"
+
+template <class T>
+void SAFE_RELEASE(T* t) {
+    if (t) {
+        t->Release();
+    }
+}
+
+void Renderer::init(IDXGISwapChain* pChain, ID3D11Device* pDevice, ID3D11DeviceContext* pContext) {
+
+    static bool once = false;
+
+    if (!once) {
+        D2D1_FACTORY_OPTIONS options;
+        options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
+        D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, options, &factory);
+    }
+
+    pChain->GetBuffer(0, IID_PPV_ARGS(&dxgiBackbuffer));
+
+    D2D1_RENDER_TARGET_PROPERTIES props = D2D1::RenderTargetProperties(
+        D2D1_RENDER_TARGET_TYPE_DEFAULT,
+        D2D1::PixelFormat(DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED));
+    factory->CreateDxgiSurfaceRenderTarget(dxgiBackbuffer, props, &d2dRenderTarget);
+    dxgiBackbuffer->Release();
+
+    if (!once) {
+        DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(writeFactory), (IUnknown**)(&writeFactory));
+        once = true;
+    }
+}
+
+void Renderer::releaseTarget() {
+    SAFE_RELEASE(d2dRenderTarget);
+}
+
+void Renderer::beginDraw() {
+    d2dRenderTarget->BeginDraw();
+}
+
+void Renderer::endDraw() {
+    d2dRenderTarget->EndDraw();
+}
+
+void Renderer::drawString(std::wstring t, float size, Vec2 pos, _RGBA rgb) {
+    const wchar_t* text = t.c_str();
+
+    float width = textWidth(t, size);
+    float height = textHeight(t, size);
+
+    if (writeFactory->CreateTextFormat(L"Arial", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL, size, L"en-US", &textFormat) != S_OK)
+        return;
+
+    textFormat->SetWordWrapping(DWRITE_WORD_WRAPPING_NO_WRAP);
+    
+    if (d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(rgb.r, rgb.g, rgb.b, rgb.a), &brush) != S_OK) {
+        SAFE_RELEASE(textFormat);
+        return;
+    }
+
+    d2dRenderTarget->DrawText(text, wcslen(text), textFormat, D2D1::RectF(pos.x, pos.y, pos.x + 1000, pos.y + 1000), brush);
+
+    SAFE_RELEASE(textFormat);
+    SAFE_RELEASE(brush);
+}
+
+void Renderer::drawRectangle(Vec2 start, Vec2 end, _RGBA rgb, float lineWidth) {
+    d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(rgb.r, rgb.g, rgb.b, rgb.a), &brush);
+    d2dRenderTarget->DrawRectangle(D2D1::RectF(start.x, start.y, end.x, end.y), brush, lineWidth);
+    SAFE_RELEASE(brush);
+}
+
+void Renderer::fillRectangle(Vec2 start, Vec2 end, _RGBA rgb) {
+    d2dRenderTarget->CreateSolidColorBrush(D2D1::ColorF(rgb.r, rgb.g, rgb.b, rgb.a), &brush);
+    d2dRenderTarget->FillRectangle(D2D1::RectF(start.x, start.y, end.x, end.y), brush);
+    SAFE_RELEASE(brush);
+}
+
+float Renderer::textWidth(std::wstring t, float size) {
+    writeFactory->CreateTextFormat(L"Arial", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL, size, L"en-US", &textFormat);
+
+    const wchar_t* text = t.c_str();
+    IDWriteTextLayout* layout = nullptr;
+    
+    writeFactory->CreateTextLayout(text, wcslen(text), textFormat, 0.0f, 0.0f, &layout);
+
+    if (layout != nullptr) {
+        DWRITE_OVERHANG_METRICS oM;
+        layout->GetOverhangMetrics(&oM);
+
+        SAFE_RELEASE(layout);
+        SAFE_RELEASE(textFormat);
+
+        return (oM.bottom / 2) + -oM.left;
+    }
+}
+
+float Renderer::textHeight(std::wstring text, float size) {
+    auto metrics = getTextMetrics(text, size);
+    return metrics.width;
+}
+
+DWRITE_TEXT_METRICS Renderer::getTextMetrics(std::wstring t, float size) {
+    const wchar_t* text = t.c_str();
+    IDWriteTextLayout* layout = nullptr;
+    writeFactory->CreateTextFormat(L"Arial", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL, size, L"", &textFormat);
+    writeFactory->CreateTextLayout(text, wcslen(text), textFormat, 0.0f, 0.0f, &layout);
+    if (layout != nullptr) {
+        DWRITE_TEXT_METRICS textMetrics;
+        layout->GetMetrics(&textMetrics);
+
+        SAFE_RELEASE(layout);
+        SAFE_RELEASE(textFormat);
+
+        return textMetrics;
+    }
+}
+
+DWRITE_OVERHANG_METRICS Renderer::getOverhangMetrics(std::wstring t, float size) {
+    const wchar_t* text = t.c_str();
+    IDWriteTextLayout* layout = nullptr;
+    writeFactory->CreateTextFormat(L"Arial", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL, size, L"", &textFormat);
+    writeFactory->CreateTextLayout(text, wcslen(text), textFormat, 0.0f, 0.0f, &layout);
+    if (layout != nullptr) {
+        DWRITE_OVERHANG_METRICS oMetrics;
+        layout->GetOverhangMetrics(&oMetrics);
+
+        SAFE_RELEASE(layout);
+        SAFE_RELEASE(textFormat);
+
+        return oMetrics;
+    }
+}
