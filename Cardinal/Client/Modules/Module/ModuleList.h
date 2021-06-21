@@ -4,7 +4,7 @@
 class ModuleList : public Module {
 public:
 	ModuleList(Client* c, Category* o) : Module(c, o, "ModuleList") {
-		this->isEnabled = true;
+		//this->isEnabled = true;
 	};
 	void onRender(Renderer*);
 	void updateAlpha();

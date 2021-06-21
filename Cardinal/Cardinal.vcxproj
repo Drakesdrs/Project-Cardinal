@@ -159,6 +159,7 @@
     <ClCompile Include="Client\Modules\Module.cpp" />
     <ClCompile Include="Cardinal.cpp" />
     <ClCompile Include="Client\Modules\Module\AirJump.cpp" />
+    <ClCompile Include="Client\Modules\Module\BoostHit.cpp" />
     <ClCompile Include="Client\Modules\Module\Commands.cpp" />
     <ClCompile Include="Client\Modules\Module\Coordinates.cpp" />
     <ClCompile Include="Client\Modules\Module\Hitbox.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Client\Modules\Module\Step.cpp" />
     <ClCompile Include="Client\Modules\Module\TabGui.cpp" />
     <ClCompile Include="Client\Modules\Module\TestMod.cpp" />
+    <ClCompile Include="Client\Modules\Module\Velocity.cpp" />
     <ClCompile Include="Client\Modules\Module\Zoom.cpp" />
     <ClCompile Include="Math\Math.cpp" />
     <ClCompile Include="Memory\Hooks\Hook.cpp" />
@@ -189,6 +191,7 @@
     <ClInclude Include="Client\Commands\Command\Teleport.h" />
     <ClInclude Include="Client\Modules\Module.h" />
     <ClInclude Include="Client\Modules\Module\AirJump.h" />
+    <ClInclude Include="Client\Modules\Module\BoostHit.h" />
     <ClInclude Include="Client\Modules\Module\Commands.h" />
     <ClInclude Include="Client\Modules\Module\Coordinates.h" />
     <ClInclude Include="Client\Modules\Module\Hitbox.h" />
@@ -199,6 +202,7 @@
     <ClInclude Include="Client\Modules\Module\Step.h" />
     <ClInclude Include="Client\Modules\Module\TabGui.h" />
     <ClInclude Include="Client\Modules\Module\TestMod.h" />
+    <ClInclude Include="Client\Modules\Module\Velocity.h" />
     <ClInclude Include="Client\Modules\Module\Zoom.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Memory\Hooks\Hook.h" />

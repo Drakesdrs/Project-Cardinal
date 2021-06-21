@@ -26,12 +26,14 @@ Client::Client(std::string name) {
 /* Combat */
 #include "Modules/Module/Killaura.h"
 #include "Modules/Module/Hitbox.h"
+#include "Modules/Module/BoostHit.h"
 /* Movement */
 #include "Modules/Module/AirJump.h"
 #include "Modules/Module/Step.h"
 #include "Modules/Module/Jetpack.h"
 /* Player */
 #include "Modules/Module/Coordinates.h"
+#include "Modules/Module/Velocity.h"
 /* Visuals */
 #include "Modules/Module/Zoom.h"
 #include "Modules/Module/TabGui.h"
@@ -97,12 +99,14 @@ void Client::init() {
 	/* Combat */
 	new Killaura(this, combat);
 	new Hitbox(this, combat);
+	new BoostHit(this, combat);
 	/* Movement */
 	new AirJump(this, movement);
 	new Step(this, movement);
 	new Jetpack(this, movement);
 	/* Player */
 	new Coords(this, player);
+	new Velocity(this, player);
 	/* Visuals */
 	new Zoom(this, visuals);
 	new TabGui(this, visuals);

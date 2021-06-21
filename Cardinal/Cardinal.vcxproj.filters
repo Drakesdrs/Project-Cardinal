@@ -99,6 +99,12 @@
     <ClCompile Include="Client\Modules\Module\PacketLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Client\Modules\Module\Velocity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\Modules\Module\BoostHit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client\Categories\Category.h">
@@ -228,6 +234,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Client\Modules\Module\PacketLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Modules\Module\Velocity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Modules\Module\BoostHit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

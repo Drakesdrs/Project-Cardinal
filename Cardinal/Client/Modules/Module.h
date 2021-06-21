@@ -35,6 +35,9 @@ public:
 
 	virtual void onPacket(class Packet*, bool* cancel = (bool*)false) {};
 
+	virtual void onLerp(Actor*, Vec3*) {};
+	virtual void onGmAttack(GameMode*, Actor*) {};
+
 	Module(class Client* client, class Category* category, std::string name, uint64_t key = 0);
 
 	ClientInstance* instance;

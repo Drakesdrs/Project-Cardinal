@@ -5,7 +5,7 @@ void Zoom::onLoop() {
 	if (key == NULL) key = 0x43;
 	this->isEnabled = client->keyMap[key];
 
-	if (player == nullptr) this->isEnabled = false;
+	if (!everythingIsValid() || !instance->minecraftGame()->canUseKeys) this->isEnabled = false;
 }
 
 void Zoom::onGmTick(GameMode* GM) {

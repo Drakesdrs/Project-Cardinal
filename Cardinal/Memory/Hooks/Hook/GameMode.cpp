@@ -6,11 +6,27 @@ Client* clientI;
 typedef void(__thiscall* GM_Tick)(GameMode* GM);
 GM_Tick _GM_Tick;
 
+typedef void(__thiscall* attack)(GameMode*, Actor*);
+attack _attack;
+
+void attackCallback(GameMode* _this, Actor* a) {
+	if (clientI != nullptr) {
+		for (auto C : clientI->categories) {
+			for (auto M : C->modules) {
+				if (M->isEnabled) M->onGmAttack(_this, a);
+			}
+		}
+	}
+	_attack(_this, a);
+}
+
 void GMTick_Callback(GameMode* GM) {
-	for (auto C : clientI->categories) {
-		for (auto M : C->modules) {
-			M->player = GM->player;
-			if(M->isEnabled) M->onGmTick(GM);
+	if (clientI != nullptr) {
+		for (auto C : clientI->categories) {
+			for (auto M : C->modules) {
+				M->player = GM->player;
+				if (M->isEnabled) M->onGmTick(GM);
+			}
 		}
 	}
 	_GM_Tick(GM);
@@ -32,5 +48,13 @@ void GameMode_Hook::init() {
 	}
 	else {
 		Utils::DebugLogF("Failed to create GameMode Hook :/");
+	}
+
+	if (MH_CreateHook((void*)VTable[14], &attackCallback, reinterpret_cast<LPVOID*>(&_attack)) == MH_OK) {
+		MH_EnableHook((void*)VTable[14]);
+		Utils::DebugLogF("Successfully completed Attack Hook!");
+	}
+	else {
+		Utils::DebugLogF("Failed to create Attack Hook :/");
 	}
 }

@@ -47,9 +47,6 @@ void Renderer::endDraw() {
 void Renderer::drawString(std::wstring t, float size, Vec2 pos, _RGBA rgb) {
     const wchar_t* text = t.c_str();
 
-    float width = textWidth(t, size);
-    float height = textHeight(t, size);
-
     if (writeFactory->CreateTextFormat(L"Arial", NULL, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL, size, L"en-US", &textFormat) != S_OK)
         return;
 
@@ -60,7 +57,7 @@ void Renderer::drawString(std::wstring t, float size, Vec2 pos, _RGBA rgb) {
         return;
     }
 
-    d2dRenderTarget->DrawText(text, wcslen(text), textFormat, D2D1::RectF(pos.x, pos.y, pos.x + 1000, pos.y + 1000), brush);
+    d2dRenderTarget->DrawText(text, wcslen(text), textFormat, D2D1::RectF(pos.x, pos.y, pos.x + 100000, pos.y + 500), brush);
 
     SAFE_RELEASE(textFormat);
     SAFE_RELEASE(brush);

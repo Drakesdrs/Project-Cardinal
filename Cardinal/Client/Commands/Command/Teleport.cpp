@@ -18,7 +18,7 @@ void TeleportCmd::execute(std::string message, std::vector<std::string> args) {
 	}
 
 	if (correctParams) {
-		Vec3 tpPos = Vec3(std::atoi(args.at(1).c_str()), std::atoi(args.at(2).c_str()), std::atoi(args.at(2).c_str()));
+		Vec3 tpPos = Vec3(std::atoi(args.at(1).c_str()), std::atoi(args.at(2).c_str()), std::atoi(args.at(3).c_str()));
 		player->_setPos(&tpPos);
 		player->printToChat("Teleported to | X: " + args.at(1) + ", Y: " + args.at(2) + ". Z: " + args.at(3));
 	}
