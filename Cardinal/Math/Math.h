@@ -100,6 +100,10 @@ struct Vec3 {
 	Vec3 normalize() {
 		return div(magnitude());
 	}
+
+	Vec3 floor() {
+		return Vec3(floorf(x), floorf(y), floorf(z));
+	}
 };
 
 struct Vec3i {
@@ -118,6 +122,10 @@ struct Vec3i {
 
 	bool operator == (Vec3i v) { return v.x == x && v.y == y && v.z == z; };
 	bool operator != (Vec3i v) { return v.x != x || v.y != y || v.z != z; };
+
+	Vec3i sub(const Vec3i& o) {
+		return Vec3i(x - o.x, y - o.y, z - o.z);
+	}
 };
 
 struct Vec4 {

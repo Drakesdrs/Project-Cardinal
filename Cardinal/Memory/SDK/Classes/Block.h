@@ -2,17 +2,21 @@
 
 class Material {
 public:
-	uintptr_t unknown;
-	char pad_0001[4]; //0x0001
-	bool isSolidBlocking; //0x0005
-	bool isDestroyable; //0x0006
-	bool isTopSolid; //0x0007
-	char pad_0008[4]; //0x0008
-	float translucency; //0x000C
-	char pad_0010[2]; //0x0010
-	bool isSolid; //0x0012
-	bool isSuperHot; //0x0013
-
+	int type; // 5 for water, 6 for lava
+	bool isFlammable;
+	bool isNeverBuildable;
+	bool isAlwaysDestroyable;
+	bool isReplaceable;
+	bool isLiquid;  // 0x0008
+private:
+	char pad2[0x3]; // 0x009
+public:
+	float translucency;  // 0x00C
+	bool isBlockingMotion;
+	bool isBlockingPrecipitation;
+	bool isSolid;
+	bool isSuperHot;
+	float color[4];
 };
 
 class BlockLegacy {

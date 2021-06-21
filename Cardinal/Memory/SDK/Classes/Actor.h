@@ -35,6 +35,13 @@ public:
 		return reinterpret_cast<Vec3*>((uintptr_t)(this) + offset);
 	}
 
+	Vec2* collision() {
+		static unsigned int offset = NULL;
+		if (offset == NULL)
+			offset = *reinterpret_cast<int*>(Utils::FindSig("F3 0F 10 81 ? ? ? ? C3 CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC 20") + 4);
+		return reinterpret_cast<Vec2*>((uintptr_t)(this) + offset);
+	}
+
 	class BlockSource* getRegionConst() {
 		static unsigned int offset = NULL;
 		if (offset == NULL)

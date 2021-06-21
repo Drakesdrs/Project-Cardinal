@@ -169,6 +169,7 @@
     <ClCompile Include="Client\Modules\Module\ModuleList.cpp" />
     <ClCompile Include="Client\Modules\Module\Nuker.cpp" />
     <ClCompile Include="Client\Modules\Module\PacketLogger.cpp" />
+    <ClCompile Include="Client\Modules\Module\Scaffold.cpp" />
     <ClCompile Include="Client\Modules\Module\Step.cpp" />
     <ClCompile Include="Client\Modules\Module\TabGui.cpp" />
     <ClCompile Include="Client\Modules\Module\TestMod.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Client\Modules\Module\ModuleList.h" />
     <ClInclude Include="Client\Modules\Module\Nuker.h" />
     <ClInclude Include="Client\Modules\Module\PacketLogger.h" />
+    <ClInclude Include="Client\Modules\Module\Scaffold.h" />
     <ClInclude Include="Client\Modules\Module\Step.h" />
     <ClInclude Include="Client\Modules\Module\TabGui.h" />
     <ClInclude Include="Client\Modules\Module\TestMod.h" />

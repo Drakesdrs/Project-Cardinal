@@ -111,6 +111,9 @@
     <ClCompile Include="Client\Modules\Module\Nuker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Client\Modules\Module\Scaffold.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client\Categories\Category.h">
@@ -252,6 +255,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Client\Modules\Module\Nuker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Modules\Module\Scaffold.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

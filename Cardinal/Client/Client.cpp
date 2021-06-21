@@ -41,6 +41,7 @@ Client::Client(std::string name) {
 /* World */
 #include "Modules/Module/Instabreak.h"
 #include "Modules/Module/Nuker.h"
+#include "Modules/Module/Scaffold.h"
 /* Exploits */
 //
 /* Other */
@@ -116,6 +117,7 @@ void Client::init() {
 	/* World */
 	new Instabreak(this, world);
 	new Nuker(this, world);
+	new Scaffold(this, world);
 	/* Exploits */
 	//
 	/* Other */
