@@ -1,5 +1,10 @@
 #include "Killaura.h"
 
+void attackEnt(GameMode* GM, Actor* e) {
+	GM->attack(e);
+	GM->player->swing();
+}
+
 void Killaura::onGmTick(GameMode* GM) {
 	auto level = player->getLevel();
 	if (level == nullptr)
@@ -16,8 +21,7 @@ void Killaura::onGmTick(GameMode* GM) {
 			auto dis = e->getPos()->distance(pos);
 
 			if (dis <= range) {
-				GM->attack(e);
-				player->swing();
+				if(player->canAttack(e, false) && e->isAlive()) attackEnt(GM, e);
 			}
 		}
 	}
@@ -41,8 +45,7 @@ void Killaura::onGmTick(GameMode* GM) {
 			auto dis = e->getPos()->distance(pos);
 
 			if (dis == distances[0]) {
-				GM->attack(e);
-				player->swing();
+				if (player->canAttack(e, false) && e->isAlive()) attackEnt(GM, e);
 			}
 		}
 	}
