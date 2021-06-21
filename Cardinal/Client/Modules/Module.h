@@ -37,6 +37,7 @@ public:
 
 	virtual void onLerp(Actor*, Vec3*) {};
 	virtual void onGmAttack(GameMode*, Actor*) {};
+	virtual void onGmStartDestroy(GameMode*, Vec3i*, UCHAR) {};
 
 	Module(class Client* client, class Category* category, std::string name, uint64_t key = 0);
 

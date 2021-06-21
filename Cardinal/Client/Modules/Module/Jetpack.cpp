@@ -4,6 +4,8 @@
 void Jetpack::onLoop() {
 	if (key == NULL) key = 0x46;
 	this->isEnabled = client->keyMap[key];
+
+	if (!everythingIsValid() || !instance->minecraftGame()->canUseKeys) this->isEnabled = false;
 }
 
 void Jetpack::onGmTick(GameMode* GM) {

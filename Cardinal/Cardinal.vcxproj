@@ -163,9 +163,11 @@
     <ClCompile Include="Client\Modules\Module\Commands.cpp" />
     <ClCompile Include="Client\Modules\Module\Coordinates.cpp" />
     <ClCompile Include="Client\Modules\Module\Hitbox.cpp" />
+    <ClCompile Include="Client\Modules\Module\Instabreak.cpp" />
     <ClCompile Include="Client\Modules\Module\Jetpack.cpp" />
     <ClCompile Include="Client\Modules\Module\Killaura.cpp" />
     <ClCompile Include="Client\Modules\Module\ModuleList.cpp" />
+    <ClCompile Include="Client\Modules\Module\Nuker.cpp" />
     <ClCompile Include="Client\Modules\Module\PacketLogger.cpp" />
     <ClCompile Include="Client\Modules\Module\Step.cpp" />
     <ClCompile Include="Client\Modules\Module\TabGui.cpp" />
@@ -195,9 +197,11 @@
     <ClInclude Include="Client\Modules\Module\Commands.h" />
     <ClInclude Include="Client\Modules\Module\Coordinates.h" />
     <ClInclude Include="Client\Modules\Module\Hitbox.h" />
+    <ClInclude Include="Client\Modules\Module\Instabreak.h" />
     <ClInclude Include="Client\Modules\Module\Jetpack.h" />
     <ClInclude Include="Client\Modules\Module\Killaura.h" />
     <ClInclude Include="Client\Modules\Module\ModuleList.h" />
+    <ClInclude Include="Client\Modules\Module\Nuker.h" />
     <ClInclude Include="Client\Modules\Module\PacketLogger.h" />
     <ClInclude Include="Client\Modules\Module\Step.h" />
     <ClInclude Include="Client\Modules\Module\TabGui.h" />

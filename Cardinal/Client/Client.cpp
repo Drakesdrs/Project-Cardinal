@@ -39,6 +39,8 @@ Client::Client(std::string name) {
 #include "Modules/Module/TabGui.h"
 #include "Modules/Module/ModuleList.h"
 /* World */
+#include "Modules/Module/Instabreak.h"
+#include "Modules/Module/Nuker.h"
 /* Exploits */
 //
 /* Other */
@@ -112,6 +114,8 @@ void Client::init() {
 	new TabGui(this, visuals);
 	new ModuleList(this, visuals);
 	/* World */
+	new Instabreak(this, world);
+	new Nuker(this, world);
 	/* Exploits */
 	//
 	/* Other */

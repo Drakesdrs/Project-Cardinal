@@ -20,6 +20,20 @@ void attackCallback(GameMode* _this, Actor* a) {
 	_attack(_this, a);
 }
 
+typedef void(__thiscall* startDestroy)(GameMode*, Vec3i*, UCHAR, bool*);
+startDestroy _startDestroy;
+
+void destroyCallback(GameMode* _this, Vec3i* blockPos, UCHAR blockFace, bool* idk) {
+	if (clientI != nullptr) {
+		for (auto C : clientI->categories) {
+			for (auto M : C->modules) {
+				if (M->isEnabled) M->onGmStartDestroy(_this, blockPos, blockFace);
+			}
+		}
+	}
+	_startDestroy(_this, blockPos, blockFace, idk);
+}
+
 void GMTick_Callback(GameMode* GM) {
 	if (clientI != nullptr) {
 		for (auto C : clientI->categories) {
@@ -56,5 +70,13 @@ void GameMode_Hook::init() {
 	}
 	else {
 		Utils::DebugLogF("Failed to create Attack Hook :/");
+	}
+
+	if (MH_CreateHook((void*)VTable[1], &destroyCallback, reinterpret_cast<LPVOID*>(&_startDestroy)) == MH_OK) {
+		MH_EnableHook((void*)VTable[1]);
+		Utils::DebugLogF("Successfully completed StartDestroyBlock Hook!");
+	}
+	else {
+		Utils::DebugLogF("Failed to create StartDestroyBlock Hook :/");
 	}
 }
